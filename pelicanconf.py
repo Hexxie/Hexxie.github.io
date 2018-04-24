@@ -29,6 +29,16 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
 SOCIAL = (('You can add links in your config file', '#'),
           ('Another social link', '#'),)
 
+#static folders
+STATIC_PATHS = ['images']
+
+#add plugins
+PLUGIN_PATHS = ['plugins']
+PLUGINS = ['better_figures_and_images']
+
+#plugin for responsive images
+RESPONSIVE_IMAGES = True
+
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
