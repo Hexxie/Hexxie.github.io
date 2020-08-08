@@ -6,6 +6,7 @@ AUTHOR = 'Anastasiia Rusakova'
 SITENAME = 'Hexblog'
 SITEURL = ''
 
+THEME = 'pelican-sober'
 PATH = 'content'
 
 TIMEZONE = 'Europe/Kiev'
@@ -20,17 +21,17 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
+#LINKS = (
+#        ('You can modify those links in your config file', '#'),)
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+SOCIAL = (('Github', 'https://github.com/Hexxie'),
+          ('LinkedIn', 'https://www.linkedin.com/in/arusakova'),
+          ('Facebook', 'https://www.facebook.com/RuNassss'),
+          ('Instagram', 'https://www.instagram.com/nastasiia_rusakova'))
 
 #static folders
-STATIC_PATHS = ['images']
+STATIC_PATHS = ['images', 'css', 'fonts', 'js']
 
 #add plugins
 PLUGIN_PATHS = ['plugins']
@@ -43,3 +44,7 @@ DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
+
+#About block in sidebar
+PELICAN_SOBER_ABOUT = "My name is Anastasiia.<br>I'm a Software Developer in Automotive industry.<br>My interests are: <ul><li>embedded development for ARM <li>C++ <li>Qt framework</ul>"
+PELICAN_SOBER_STICKY_SIDEBAR = True
