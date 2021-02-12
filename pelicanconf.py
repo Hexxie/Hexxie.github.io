@@ -34,8 +34,8 @@ SOCIAL = (('Github', 'https://github.com/Hexxie'),
 STATIC_PATHS = ['images', 'css', 'fonts', 'js']
 
 #add plugins
-PLUGIN_PATHS = ['plugins']
-PLUGINS = ['better_figures_and_images']
+#PLUGIN_PATHS = ['plugins']
+#PLUGINS = ['better_figures_and_images']
 
 #plugin for responsive images
 RESPONSIVE_IMAGES = True
