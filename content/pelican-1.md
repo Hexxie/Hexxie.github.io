@@ -1,7 +1,7 @@
 Title: Pelican internals: Как внести правки в css
 Date: 2021-02-12 13:30
 Category: Pelican
-Tags: blocg, pelican, internals, web
+Tags: blog, pelican, internals, web
 Authors: Anastasiia Rusakova
 Summary: Основные мысли о популярных протоколах в автомотиве
 
