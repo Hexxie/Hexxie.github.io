@@ -31,48 +31,30 @@
 
 
         <article>
-          <h1><a href="/pelican-internals-kak-vnesti-pravki-v-css.html">Pelican internals: Как внести правки в css</a></h1>
-          <p>В пару статей у меня была табличка. И в текущей теме она была без рамок. Выглядело это не красиво и я решила поменять стиль.
-Ну фигня же, добавить border, типа так:</p>
-<div class="highlight"><pre><span></span><span class="nt">table</span><span class="p">{</span>
-    <span class="k">border-collapse</span><span class="p">:</span> <span class="kc">collapse</span><span class="p">;</span>
-    <span class="k">border-spacing</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">border</span><span class="p">:</span><span class="mi">2</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#000000</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="nt">th</span><span class="p">{</span>
-<span class="k">border</span><span class="p">:</span><span class="mi">2</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#000000</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="nt">td</span><span class="p">{</span>
-<span class="k">border</span><span class="p">:</span><span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#000000</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>Я посмотрела source code самой странички, ccs хранится в href="/theme/css/main.css". Я добавила свои 3 стиля. Сгенерила сайт, но ничего не поменялось. При чем в main.css моих стилей не было.</p>
-<p>Ок. Я через everything нашла все main.css на моем ПК. Их было довольно много, учитывая всякие tmp директории. Но, я знаю что у меня в блоге установлена тема pelican-sober. Скорее всего пеликан может собирать css из этой темы, которая может быть установлена "где-то". Например в плагинах. Внесла правки туда - не работает.</p>
-<p>Скачала сорсы. Я ж инженер. Щас разберемся что оно куда копирует.
-Для генерации статического сайта я использую комманду</p>
-<div class="highlight"><pre><span></span>pelican content
-</pre></div>
-
-
-<p>Решила поискать по сорсам слово content. Ничего толком не нашла. Нашла обработку консольных параметров пеликана. Контента там нет, но есть path. Т.е. по факту я использую комманду</p>
-<div class="highlight"><pre><span></span>pelican path
-</pre></div>
-
-
-<p>Т.е. контент это моя папка с .md файлами. Ок. А как же оно копирует в целевую папку? Там на самом деле много генерато-движений но суть в том, что оно находит папку с темой, видимо путь к теме прописывается во время установки темы и копирует прям оттуда css, js.
-Если что, мой путь к теме выглядит так:
-    AppData\Local\Programs\Python\Python36-32\Lib\site-packages\pelican\themes\pelican-sober</p>
-<p>Так как на самом деле мой блог сейчас похож на помойку файлов. Я решила проверить эту теорию. Создала новую папку, скопировала туда content и pelicanconf.py. Сгенерила файлы и..все получилось, при чем в аутпуте был мой модифицированный ccs.</p>
-<p>Ок. Ранним локальный сервер. И..... ничего не получилось. Не может быть!
-Я не верю своим глазам, и гуглю что-то типа "clean localhost files". И вуаля - решение моей проблемы первой ссылкой: "Chrome loading cached files on localhost". Проверка в анонимной вкладке - все работает.
-Решение проблемы: developer tools &gt; application &gt; clear storage</p>
-<p>Спасибо хром. Зато я почистила контент блога и разобралась немного (ну совсем немного) как работает пеликан, как минимум откуда и куда он складывает файлы.</p>
-<p>UPD. Я не веб девелопер и не питон девелопер. Но код прочитать могу любой. Главное желание.</p>
-<p>Продолжение следует...</p>
+          <h1><a href="/dig-into-hw-programming.html">Dig into hw programming</a></h1>
+          <p>Наконееец-то я занялась этим долгожданным многопродуманным проектом!
+Концепция и реквайрменты - это секрет. Я буду описывать только инсайты, а потом соберу свой прогресс когда проект будет закончен.</p>
+<p><img alt="Hello World setup" src="/images/hw-1.jpg"></p>
+<p>Я так давно хотела попробовать кодить под stm32. А еще мне в прошлом году так свезло - я научилась паять. Так что теперь ничего не останавливает меня взяться за этот проект. Опыт программирования есть, опыт пайки - тоже.</p>
+<p>Сегодня что-то типа традиционного "Hello world". Знакомство с инструментарием, первые подключения внешней периферии.
+Я скачала официальные stm cube и keil uVision. И вот куб зашел мне больше. Особенно прикольная генерация кода и раскладка пинов. Правда я уже успела все зафейлить)) об это подробнее.</p>
+<p>Нарисовала я значит схему. Бест практис инженерии - сначала дизайн - потом лепим все остальное. Подключила, что можно, к макетке. Проводки напряжения и земли решила подпаять, так как работать нам с ними еще долго.</p>
+<p>Ну а дальше началось творчество. Вообще тот факт что куб прописывает много генеренки мне не понравилось. Это ж по сути с генеренным кодом еще расчехляться придется. Ну для Hello World сойдет. Перешла я на вкладку конфигурации контроллера, а там пины можно прям через гуи настроить.</p>
+<p><img alt="Device Configuration" src="/images/hw-1-1.jpg"></p>
+<p>Метод тыка наше все. Пины я все ресетнула. Ну а зачем, мне же только светодиод подключить. Хватит и одного.
+Сгенерило оно инит моего пина. Я дописала toggle с задержкой в 2 секунды. Флешим. Ура работает!</p>
+<p>Ну крутяк! Я решила уменьшить задержку между мигалкой. А оно не прошивается... пишет типа st-link не видит. Но он подключен, горит, серийник получает.
+st-link - это внешний дебагер, через него микроконтроллер шьется. Не знаю может в stm32 есть еще способы типа через uart, но st-link - самый простой случай.</p>
+<p>Пошла я гуглить. Одни пишут к ресету stlink-а подключится, другие - напряжения не хватает. Щитооо... еще был комментарий типа в настройках указать Connect under reset. Но у меня оно и так быть указано. В одном из комментариев было описано что-то типа "...оно не хочет прошивать когда контроллер раннит программу...". И тут я решила попробовать прошить с зажатым ресетом.</p>
+<p>Смекалка и метод тыка наше все. К st-link мы подключились, но прошиваться все равно не хочет. Новая ошибка - уже прогресс: Debugger connected Target is not responding, retrying...
+Гуглю. Первая ссылка. Оказалось не стоило все пины ресетать.</p>
+<blockquote>
+<p>So as soon as the new program is flashed the SWD connection goes dead. I guess the mbed program retains the use of SWD on the standard pins by default so it was never an ssue there.</p>
+</blockquote>
+<p>Вернула назад пины для sw дебага и все теперь работает. Иначе нужно было, используя ресет, стирать прошивку в st-link утилите и заново прошиваться.</p>
+<p>Хотелось бы написать здесь вывод - не трогай то, что не знаешь. Но...я бы и не узнала =)
+Лучше скажу так: запоминай то что делаешь. Чтоб знать как гуглить. Ну а я пошла дальше играться)</p>
+<p><a href="https://stackoverflow.com/questions/60827602/stm32cubeide-can-only-flash-once-no-swd-debugging">Спасибо стековерфлову.</a></p>
         </article>
 
         <hr />
@@ -81,6 +63,12 @@
             <h3>Last posts</h3>
             <ol class="archive">
 
+
+
+        <li>
+<a href="/pelican-internals-kak-vnesti-pravki-v-css.html" rel="bookmark" title="Permalink to Pelican internals: Как внести правки в css">Pelican internals: Как внести правки в css</a>
+  <time datetime="2021-02-12T13:30:00+02:00">Fri 12 February 2021</time>
+<p class="tags">tags: <a href="/tag/blog.html">blog</a><a href="/tag/pelican.html">pelican</a><a href="/tag/internals.html">internals</a><a href="/tag/web.html">web</a></p>        </li>
 
 
         <li>
@@ -107,10 +95,6 @@
 <p class="tags">tags: <a href="/tag/razmyshleniia.html">размышления</a><a href="/tag/rabota.html">работа</a><a href="/tag/programmirovanie.html">программирование</a><a href="/tag/organizatsiia.html">организация</a></p>        </li>
 
 
-        <li>
-<a href="/perezagruzka.html" rel="bookmark" title="Permalink to Перезагрузка">Перезагрузка</a>
-  <time datetime="2018-04-19T23:23:00+03:00">Thu 19 April 2018</time>
-<p class="tags">tags: <a href="/tag/info.html">инфо</a><a href="/tag/rekonstruktsiia.html">реконструкция</a><a href="/tag/apgreidbloga.html">апгрейдблога</a></p>        </li>
 
 
 
@@ -143,6 +127,7 @@
 	            <h2>Categories</h2>
 	            <ul>
 	                <li ><a href="/category/avtomotiv.html">Автомотив</a></li>
+	                <li ><a href="/category/hardware.html">Hardware</a></li>
 	                <li ><a href="/category/info.html">Инфо</a></li>
 	                <li ><a href="/category/obzory.html">Обзоры</a></li>
 	                <li ><a href="/category/pelican.html">Pelican</a></li>
