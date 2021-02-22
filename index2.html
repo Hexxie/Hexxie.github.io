@@ -31,40 +31,11 @@
 
 
         <article>
-          <h1><a href="/khroniki-hw-encoder-uart.html">Хроники hw: encoder, uart</a></h1>
-          <p>Я тут в summary написала from zero to hero. Потому что на самом деле у меня совсем нет никакого бекграуна в hardware. Все что я тут описываю - я делаю впервые. И схему тоже собираю впервые. Тем интереснее.</p>
-<p><img alt="uart" src="/images/hw-3.jpg"></p>
-<p>Вчера мне пришли новые элементы и я решила начать с простого: изменять энкодером яркость светодиода.
-Это у меня получилось прям сходу, потому что как оказалось в stm32 таймера поддерживают encoder mode и сube сетапит как раз 2 пина. Т.е. 3 клика, вцепил 2 проводка, написал три строки типа так:</p>
-<div class="highlight"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">TIM2</span><span class="o">-&gt;</span><span class="n">CNT</span> <span class="o">&lt;</span> <span class="mi">1023</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="n">LED_DutyCycle</span> <span class="o">=</span> <span class="p">((</span><span class="n">TIM2</span><span class="o">-&gt;</span><span class="n">CNT</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="mi">6</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="n">TIM1</span><span class="o">-&gt;</span><span class="n">CCR1</span> <span class="o">=</span> <span class="n">LED_DutyCycle</span><span class="p">;</span>
-<span class="n">HAL_Delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-</pre></div>
-
-
-<p>и готово. В кратце у меня есть 2 таймера. Один - ШИМ, второй - энкодер. Таймер шима работает через сравнение с CCR1 регистром. Соответсвенно каждый поворот энкодера - увеличивает или уменьшает число счетчика, записанное в CCR1 регистр.</p>
-<p>Дальше я увидела, что люди как-то в своих туториалах выводят логи в юарт. Юарта у меня нет, но мне очень захотелось. Обычно у людей есть переходник uart-to-usb от ftdi. Но конечно же не у меня. Зато у меня есть ардуино.
-Я нашла <a href="https://istarik.ru/blog/stm32/111.html">статью</a>, которая описывает как прошить стмку через юарт. Прошиваться через юарт мне пока рано (но скоро пробну), но здесь описано как превратить ардуино в конвертер.</p>
-<p>Примерно так:</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
-<span class="p">{</span>
-   <span class="n">pinMode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
-   <span class="n">pinMode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
-<span class="p">}</span>
- <span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span>
-<span class="p">{}</span>
-</pre></div>
-
-
-<p>Потом настраивает в кубе юарт и подключаемся проводами. TX -&gt; RX, RX -&gt; TX.</p>
-<p>У меня была веселая история, связанная с юартом на самом деле. Я не знала про TX -&gt; RX особенность и думала что нет разницы как подключать. У меня часто возникала ситуация на работе, что я не могла подключить плату. Ну т.е. плату я подключала но логи не работали. Я тогда звала коллегу и он...мм..мне казалось что он сильнее прижимал коннектор. В общем я так и делала, когда у меня не работало, но к успеху я так и не приходила -&gt; приходилось часто звать коллегу. И вот мне сейчас интересно, он реально не выкупал, что я не шарю, что сторона важна или прикалывался.
-К чему я веду. Нежданно негаданно приехал карантин, платы пришлось забрать домой. И тут я столкнулась со своей любимй проблемой. Подключаю я плату, а логи не идут. Я уже прижимаю те коннекторы как могу, и тут парень спрашивает "а ты шаришь что юарт напревленный?". Я такая "в смысле?" - "TX -&gt; RX, RX -&gt; TX, имеет значение какой стороной ты подключаешь". В общем перевернула я коннектор, и все заработало.</p>
-<p>Что я хочу сказать? А то что поделки своми руками очень полезны, так что советую всем интересующимся сесть за комп и что-то сделать =)</p>
-<p>P.S. Вовчик, если ты это читаешь и хочешь свою ардуинку обратно - напиши и я вышлю НП =) или отдам при встрече =)</p>
-<p><a href="https://github.com/Hexxie/stm32-workaraunds/tree/main/encoder">Код здесь</a></p>
+          <h1><a href="/khroniki-hw-led-inidicator.html">Хроники hw: led inidicator</a></h1>
+          <p>Сегодня я решила оставить, так сказать, отметку о том что проект двигается. Проблем пока что не возникает. Я закодила индикатор с циферками, пробовала выодить как значения а-ля температуры, время так и динамически - дискретное значение энкодера.
+Так же сегодня я подключила esp8266, правда у меня не хватает usb портов и в игру вступил хаб. Вот только винда обиделась и решила не создавать больше ком порты. Завтра буду решать этот вопрос, ну или перезагрузка решит его за меня).</p>
+<p>На самом деле мне осталось подключить lcd экранчик нарисовать схему и все подпаять, чтоб дальше уже заниматься архитектурой и логикой моего изделия.</p>
+<p>Stay tune так сказать)</p>
         </article>
 
         <hr />
@@ -73,6 +44,12 @@
             <h3>Last posts</h3>
             <ol class="archive">
 
+
+
+        <li>
+<a href="/khroniki-hw-encoder-uart.html" rel="bookmark" title="Permalink to Хроники hw: encoder, uart">Хроники hw: encoder, uart</a>
+  <time datetime="2021-02-18T19:35:00+02:00">Thu 18 February 2021</time>
+<p class="tags">tags: <a href="/tag/hartdware.html">hartdware</a><a href="/tag/stm32.html">stm32</a><a href="/tag/pet-project.html">pet project</a><a href="/tag/pwm.html">pwm</a><a href="/tag/encoder.html">encoder</a><a href="/tag/uart.html">uart</a></p>        </li>
 
 
         <li>
@@ -99,10 +76,6 @@
 <p class="tags">tags: <a href="/tag/samorazvitie.html">саморазвитие</a></p>        </li>
 
 
-        <li>
-<a href="/itogi-treninga-middleware-applications-protocols.html" rel="bookmark" title="Permalink to Итоги тренинга "Middleware & Applications Protocols"">Итоги тренинга "Middleware & Applications Protocols"</a>
-  <time datetime="2021-02-08T15:15:00+02:00">Mon 08 February 2021</time>
-<p class="tags">tags: <a href="/tag/samorazvitie.html">саморазвитие</a><a href="/tag/protokoly.html">протоколы</a><a href="/tag/avtomotiv.html">автомотив</a><a href="/tag/mqtt.html">mqtt</a><a href="/tag/dds.html">dds</a><a href="/tag/middlware.html">middlware</a><a href="/tag/rpc.html">rpc</a></p>        </li>
 
 
 
